@@ -2,9 +2,9 @@
 import 'package:bloc_pattern/pages/post_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/home_bloc.dart';
-import '../bloc/home_event.dart';
-import '../bloc/home_state.dart';
+import '../bloc/home/home_bloc.dart';
+import '../bloc/home/home_event.dart';
+import '../bloc/home/home_state.dart';
 import '../model/post_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,6 +35,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("BloC"),
+          actions: [
+            IconButton(onPressed: (){
+              homeBloc.callCreatePage(context);
+            }, icon: const Icon(Icons.add))
+          ],
         ),
         body: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
@@ -71,7 +76,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget viewOfPostList(List<PostModel> items) {
+  Widget viewOfPostList(List<PostModel> items, ) {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (ctx, index) {
@@ -79,47 +84,5 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-/*void _showBottomSheet(BuildContext context, void Function() func) {
-    showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        builder: (BuildContext context) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                //mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const Text(
-                    'Add new post',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                  TextFormField(
-                    controller: userIdCtr,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(labelText: 'UserID'),
-                  ),
-                  TextFormField(
-                    controller: titleCtr,
-                    decoration: const InputDecoration(labelText: 'Title'),
-                  ),
-                  TextFormField(
-                    controller: bodyCtr,
-                    decoration: const InputDecoration(labelText: 'Body'),
-                  ),
-                  ElevatedButton(
-                    onPressed: func,
-                    child: const Text('Add'),
-                  ),
-                  const SizedBox(
-                    height: 400,
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }*/
+
 }

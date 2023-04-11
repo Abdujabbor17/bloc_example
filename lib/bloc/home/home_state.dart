@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import '../model/post_model.dart';
+import '../../model/post_model.dart';
 
 @immutable
 abstract class HomeState extends Equatable {

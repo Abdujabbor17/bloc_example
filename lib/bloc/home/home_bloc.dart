@@ -1,7 +1,11 @@
+import 'package:bloc_pattern/bloc/update/update_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../service/post_service.dart';
+import '../../model/post_model.dart';
+import '../../pages/create_page.dart';
+import '../../pages/update_page.dart';
+import '../../service/post_service.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 
@@ -37,25 +41,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
 
-  // void callCreatePage(BuildContext context) async {
-  //   var results = await Navigator.of(context).push(MaterialPageRoute(
-  //       builder: (context) => BlocProvider(
-  //             create: (context) => CreateBloc(),
-  //             child: const CreatePage(),
-  //           )));
-  //   if (results != null) {
-  //     add(LoadPostsEvent());
-  //   }
-  // }
-  //
-  // void callUpdatePage(BuildContext context, Post post) async {
-  //   var results = await Navigator.of(context).push(MaterialPageRoute(
-  //       builder: (context) => BlocProvider(
-  //             create: (context) => UpdateBloc(),
-  //             child: UpdatePage(post: post),
-  //           )));
-  //   if (results != null) {
-  //     add(LoadPostsEvent());
-  //   }
-  // }
+  void callCreatePage(BuildContext context) async {
+    var results = await Navigator.of(context).push(
+        MaterialPageRoute(
+        builder: (context) => const CreatePage()));
+    if (results != null) {
+      add(LoadPostsEvent());
+    }
+  }
+
+  void callUpdatePage(BuildContext context, PostModel post) async {
+    var results = await Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => UpdatePage(post: post)));
+    if (results != null) {
+      add(LoadPostsEvent());
+    }
+  }
 }

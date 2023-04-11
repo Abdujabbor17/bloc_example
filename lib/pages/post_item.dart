@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../model/post_model.dart';
-import '../bloc/home_bloc.dart';
-import '../bloc/home_event.dart';
+import '../bloc/home/home_bloc.dart';
+import '../bloc/home/home_event.dart';
 
 Widget postItem(BuildContext context, PostModel post) {
   return Padding(
@@ -36,7 +36,9 @@ Widget postItem(BuildContext context, PostModel post) {
             ),
             Column(
               children: [
-                IconButton(onPressed: (){}, icon: const Icon(Icons.edit)),
+                IconButton(onPressed: (){
+                  BlocProvider.of<HomeBloc>(context).callUpdatePage(context, post);
+                }, icon: const Icon(Icons.edit)),
                 const SizedBox(
                   height: 10,
                 ),
